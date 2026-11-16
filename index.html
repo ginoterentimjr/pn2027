@@ -365,12 +365,19 @@ function telaInicio(){
     } catch(e){ st.className = 'status erro'; st.textContent = FALHAS[e && e.tipo] || FALHAS.outro; }
     bt.disabled = false;
   } }, 'Testar a conexão com a IA');
+  const destaque = D.planilhas ? el('div', { class:'panel', style:'margin-bottom:34px;border-left:6px solid var(--accent);display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;padding:24px 28px' },
+    el('div', { style:'flex:1 1 380px' },
+      el('p', { class:'quando', style:'margin:0 0 6px' }, 'ENCONTRO 3 · TERÇA-FEIRA, 17 DE NOVEMBRO'),
+      el('h2', { style:'margin:0 0 6px;font-size:26px;letter-spacing:0;text-transform:none;color:inherit' }, 'Planilha da mesa'),
+      el('p', { style:'margin:0' }, 'Baixe a planilha do encontro 3 da sua diretoria, abra no Excel e salve no notebook da mesa.')),
+    el('a', { class:'btn', href:'#/planilhas', style:'font-size:18px;padding:16px 26px' }, 'Baixar a planilha da mesa')) : null;
   app.replaceChildren(
+    destaque,
     el('h1', { html: D.inicio.h1 }), el('p', { class:'lede' }, IA ? D.inicio.lede : D.inicio.lede_sem_ia),
     el('div', { class:'cards' }, cards),
     el('div', { class:'panel', style:'margin-top:20px' }, el('h2', null, 'Como usar na oficina'), el('ol', { class:'passos' }, (IA ? D.inicio.passos : D.inicio.passos_sem_ia).map(p => el('li', null, p))), IA ? el('p', { class:'aviso' }, D.aviso) : null),
     el('div', { class:'row' }, bt, qT[0]), qT[1], st,
-    D.planilhas ? el('p', { class:'hint', style:'margin-top:18px' }, el('a', { href:'#/planilhas', style:'color:var(--accent-ink);font-weight:700' }, 'Planilhas de coleta: baixar a planilha da mesa')) : null);
+    null);
   botaoAjuda();
 }
 async function baixar(i, st){

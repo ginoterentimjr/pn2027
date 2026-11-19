@@ -372,12 +372,11 @@ function telaInicio(){
       el('p', { style:'margin:0' }, 'Baixe a planilha do encontro 4 da sua mesa, abra no Excel e salve na pasta da diretoria.')),
     el('a', { class:'btn', href:'#/planilhas', style:'font-size:18px;padding:16px 26px' }, 'Baixar a planilha da mesa')) : null;
   app.replaceChildren(
-    destaque,
+    ...[destaque].filter(Boolean),
     el('h1', { html: D.inicio.h1 }), el('p', { class:'lede' }, IA ? D.inicio.lede : D.inicio.lede_sem_ia),
     el('div', { class:'cards' }, cards),
     el('div', { class:'panel', style:'margin-top:20px' }, el('h2', null, 'Como usar na oficina'), el('ol', { class:'passos' }, (IA ? D.inicio.passos : D.inicio.passos_sem_ia).map(p => el('li', null, p))), IA ? el('p', { class:'aviso' }, D.aviso) : null),
-    el('div', { class:'row' }, bt, qT[0]), qT[1], st,
-    null);
+    el('div', { class:'row' }, bt, qT[0]), qT[1], st);
   botaoAjuda();
 }
 async function baixar(i, st){
